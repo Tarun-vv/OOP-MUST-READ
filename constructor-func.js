@@ -28,6 +28,11 @@ Person.prototype.calcAge = function () {
 const jonas = new Person('Jonas', 1991);
 jonas.calcAge(); // NOTE: 46
 
+// NOTE: static methods / methods available on the constructor function and not the prototype
+Person.hey = function () {
+  console.log('Hey there');
+};
+
 // NOTE: OUTPUTS;
 console.log(typeof Person); // NOTE: type is 'function'
 
@@ -45,3 +50,29 @@ console.log(Person.prototype.isPrototypeOf(Person)); // NOTE: false
 console.log(typeof Person.prototype); // NOTE: type is 'object'
 console.log(typeof Person.prototype.__proto__); // NOTE: type is 'object'
 console.dir(Person.prototype.constructor); // NOTE: Person
+
+Person.hey();
+
+// NOTE: INHERITANCE BETWEEN CLASSSES || CREATING THE STUDENT CLASS
+
+// NOTE: we pass in same arguments as parent with some additional ones
+const Student = function (firstName, birthYear, course) {
+  // this.firstName = firstName;
+  // this.birthYear = birthYear;
+  // NOTE: instead of this, do this
+  Person.call(this, firstName, birthYear);
+  this.course = course;
+};
+
+// NOTE: set the prototype connection between Student.prototype and Person.prototype here
+Student.prototype = Object.create(Person.prototype);
+
+Student.prototype.introduce = function () {
+  console.log(`Hello! My name is ${this.firstName}`);
+};
+
+const mike = new Student('mike', 1987, 'maths');
+
+console.log(mike);
+mike.introduce();
+mike.calcAge(); // NOTE: method inherited from Person.prototye
