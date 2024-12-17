@@ -36,6 +36,12 @@ console.log(typeof jonas); // NOTE: type is 'object'
 console.log(jonas instanceof Person); // NOTE: true
 console.log(jonas.__proto__); // NOTE: get the prototype of object
 console.log(jonas.__proto__ === Person.prototype); // NOTE: true
+console.log(jonas.__proto__.__proto__); // NOTE: object.create()
+console.log(typeof jonas.__proto__.__proto__); // NOTE: object
+
 console.log(Person.prototype.isPrototypeOf(jonas)); // NOTE: same as above method -> true
+console.log(Person.prototype.isPrototypeOf(Person)); // NOTE: false
 
 console.log(typeof Person.prototype); // NOTE: type is 'object'
+console.log(typeof Person.prototype.__proto__); // NOTE: type is 'object'
+console.dir(Person.prototype.constructor); // NOTE: Person
