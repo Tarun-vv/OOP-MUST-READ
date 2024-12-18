@@ -22,3 +22,22 @@ steven.calcAge();
 // NOTE: OUTPUT
 console.log(typeof steven); // NOTE: object
 console.log(steven.__proto__ === PersonProto); // NOTE: true
+
+// NOTE: INHERITANCE BETWEEN CLASSES
+
+const StudentProto = Object.create(PersonProto);
+// NOTE: property filler function
+StudentProto.init = function (firstName, birthYear, course) {
+  PersonProto.init.call(this, firstName, birthYear);
+  this.course = course;
+};
+
+// NOTE: custom method
+StudentProto.introduce = function () {
+  console.log(`My name is ${this.firstName} and I study ${this.course}`);
+};
+
+const jay = Object.create(StudentProto);
+jay.init('jay', 2010, 'CS');
+jay.introduce();
+jay.calcAge();

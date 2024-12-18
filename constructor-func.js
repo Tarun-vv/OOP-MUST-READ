@@ -73,6 +73,62 @@ Student.prototype.introduce = function () {
 
 const mike = new Student('mike', 1987, 'maths');
 
+// NOTE: fixing Student constructor
+Student.prototype.constructor = Student;
+
 console.log(mike);
 mike.introduce();
 mike.calcAge(); // NOTE: method inherited from Person.prototye
+
+console.log(mike.__proto__); // NOTE: Student
+console.log(mike.__proto__.__proto__); // NOTE: Person
+console.log(mike.__proto__.__proto__.__proto__); // NOTE: Object prototype
+
+console.log(mike instanceof Student); // NOTE: 'true'
+console.log(mike instanceof Person); // NOTE: 'true'
+
+// CHALLENGE
+function Car(name, speed) {
+  this.name = name;
+  this.speed = speed;
+}
+
+Car.prototype.accelerate = function () {
+  return (this.speed += 10);
+};
+
+Car.prototype.brake = function () {
+  return (this.speed -= 5);
+};
+
+const bmw = new Car('bmw', 120);
+
+const EVCar = function (name, speed, charge) {
+  Car.call(this, name, speed);
+  this.charge = charge;
+};
+
+EVCar.prototype = Object.create(Car.prototype);
+
+EVCar.prototype.accelerate = function () {
+  console.log(
+    `${
+      this.name
+    } is going at ${(this.speed += 10)} speed with a charge of ${(this.charge -= 1)}`
+  );
+};
+
+EVCar.prototype.brake = function brake() {
+  console.log(`${this.name} is going at ${(this.speed -= 5)} speed`);
+};
+
+EVCar.prototype.setCharge = function (charge) {
+  this.charge = charge;
+};
+
+const tesla = new EVCar('Tesla', 130, 60);
+
+EVCar.prototype.constructor = EVCar;
+
+tesla.accelerate();
+console.log(tesla);
