@@ -9,6 +9,8 @@ class Account {
   // NOTE: declare public fields here outside
   locale = navigator.language;
   bank = 'Bankist';
+  // NOTE: only present in Student class not prototype
+  static x = 23;
 
   // NOTE: protecting private fields
   #movements = [];

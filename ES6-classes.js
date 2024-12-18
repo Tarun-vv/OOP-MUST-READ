@@ -70,7 +70,7 @@ console.log(bmw.speedUS);
 class StudentCl extends PersonCl {
   // NOTE: student also recieves same parameters as Person
   constructor(firstName, birthYear, course) {
-    // NOTE: instead of calling Person.call() and etc -> ALWAYS have to come first
+    // NOTE: instead of calling Person.call() and etc -> ALWAYS have to come first super is needed if using 'extends'
     super(firstName, birthYear);
     this.course = course;
   }
